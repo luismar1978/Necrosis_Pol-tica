@@ -1,0 +1,36 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
+
+const posts = (await getCollection('posts')).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime()
+);
+---
+
+<BaseLayout
+  title="Necrosis Política"
+  description="Análisis político desde la psicología, la neurociencia y los datos. Un espacio para entender la política colombiana más allá de los titulares."
+>
+  <div class="home-intro">
+    <p>
+      La política no es solo espectáculo ni ideología: es el reflejo de cómo funciona nuestro cerebro bajo presión, miedo e incertidumbre. En <strong>Necrosis Política</strong> diseccionamos —con datos, ciencia y contexto histórico— los mecanismos que explican por qué Colombia vota, piensa y se polariza como lo hace.
+    </p>
+  </div>
+
+  {
+    posts.length > 0 ? (
+      <ul class="post-list">
+        {posts.map((post) => <PostCard {post} />)}
+      </ul>
+    ) : (
+      <div class="empty-state">
+        <p>Pronto publicaremos el primer análisis. Vuelve en unos días.</p>
+      </div>
+    )
+  }
+</BaseLayout>
+
+<style>
+  @import '../styles/global.css';
+</style>

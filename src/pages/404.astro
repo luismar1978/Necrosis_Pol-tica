@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Página no encontrada" description="Error 404 - Página no encontrada">
+  <div class="empty-state">
+    <h2 style="font-family: var(--font-sans); font-size: 2rem; margin-bottom: 1rem;">404</h2>
+    <p>Esta página no existe. Quizás fue censurada. O quizás nunca estuvo aquí.</p>
+    <p style="margin-top: 1.5rem;">
+      <a href="/" style="color: var(--color-accent); font-family: var(--font-sans);">&larr; Volver al inicio</a>
+    </p>
+  </div>
+</BaseLayout>
+
+<style>
+  @import '../styles/global.css';
+</style>

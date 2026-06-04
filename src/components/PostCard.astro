@@ -1,0 +1,33 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+export interface Props {
+  post: CollectionEntry<'posts'>;
+}
+
+const { post } = Astro.props;
+const { title, date, tags, subtitle } = post.data;
+---
+
+<article class="post-card">
+  <div class="post-card-date">
+    {new Date(date).toLocaleDateString('es-CO', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    })}
+  </div>
+  <h2 class="post-card-title">
+    <a href={`/posts/${post.slug}`}>{title}</a>
+  </h2>
+  {subtitle && <p class="post-card-excerpt">{subtitle}</p>}
+  {
+    tags && tags.length > 0 && (
+      <div class="post-card-tags">
+        {tags.map((tag: string) => (
+          <a href={`/etiqueta/${tag.toLowerCase().replace(/\s+/g, '-')}`} class="tag">{tag}</a>
+        ))}
+      </div>
+    )
+  }
+</article>
